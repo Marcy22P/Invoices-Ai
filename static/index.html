@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cattura o Carica Immagine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #camera {
+            max-width: 100%;
+            border: 1px solid #ccc;
+        }
+        #canvas {
+            display: none;
+        }
+        .response-message, .error-message {
+            color: #333;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+        }
+        @media (max-width: 768px) {
+            #camera {
+                width: auto;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Cattura o Carica la tua Fattura/Scontrino</h1>
+    <p>Clicca sul pulsante qui sotto per scattare una foto o caricare un'immagine.</p>
+
+    <div>
+        <h2>Usa la Fotocamera</h2>
+        <video id="camera" autoplay></video>
+        <button id="capture">Cattura Immagine</button>
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <div>
+        <h2>Oppure carica un'immagine</h2>
+        <input type="file" accept="image/*" id="upload">
+    </div>
+
+    <button id="send">Invia Immagine</button>
+    <div id="message" class="response-message"></div> <!-- Elemento per messaggi di risposta AI e Vision -->
+
+    <script>
+        const camera = document.getElementById('camera');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const captureButton = document.getElementById('capture');
+        const sendButton = document.getElementById('send');
+        const uploadInput = document.getElementById('upload');
+        const messageDiv = document.getElementById('message'); // Div per i messaggi
+        let imageToUpload = null;
+        let localMediaStream = null; // Stream della fotocamera
+
+        // Funzione per fermare lo stream della fotocamera
+        function stopCameraStream() {
+            if (localMediaStream) {
+                localMediaStream.getTracks().forEach(track => track.stop());
+                localMediaStream = null;
+            }
+        }
+
+        captureButton.addEventListener('click', () => {
+            if (localMediaStream) {
+                // Se lo stream è già attivo, cattura l'immagine
+                context.drawImage(camera, 0, 0, canvas.width, canvas.height);
+                imageToUpload = canvas.toDataURL('image/png');
+                stopCameraStream(); // Ferma lo stream dopo la cattura
+            } else {
+                // Altrimenti, avvia la fotocamera
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then((stream) => {
+                        localMediaStream = stream;
+                        camera.srcObject = stream;
+                        camera.onloadedmetadata = () => {
+                            canvas.width = camera.videoWidth;
+                            canvas.height = camera.videoHeight;
+                        };
+                    })
+                    .catch((error) => {
+                        console.error('Access to camera was denied:', error);
+                        messageDiv.className = 'error-message';
+                        messageDiv.textContent = 'Non è stato possibile accedere alla fotocamera. Assicurati di aver dato i permessi necessari.';
+                    });
+            }
+        });
+
+        sendButton.addEventListener('click', () => {
+            // Assicurati di fermare la fotocamera se è ancora attiva
+            stopCameraStream();
+
+            // Gestione dell'invio dell'immagine
+            if (uploadInput.files.length > 0) {
+                uploadImage(uploadInput.files[0]);
+            } else if (imageToUpload) {
+                fetch(imageToUpload)
+                    .then(res => res.blob())
+                    .then(blob => {
+                        const file = new File([blob], 'image.png', { type: 'image/png' });
+                        uploadImage(file);
+                    });
+            } else {
+                messageDiv.className = 'error-message';
+                messageDiv.textContent = 'Per favore, cattura un\'immagine o carica un file prima diinvia.';
+                messageDiv.style.display = 'block';
+            }
+        });
+        function uploadImage(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    fetch('http://localhost:8000/upload', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Assuming 'ai_response' is the key in the JSON response for the AI's text
+        const aiResponse = data.ai_response;
+        // Here you display only the AI's response
+        messageDiv.textContent = `Risposta AI: ${aiResponse}`;
+        messageDiv.style.display = 'block';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        messageDiv.textContent = 'Errore nell\'invio dell\'immagine.';
+        messageDiv.style.display = 'block';
+    });
+}
+
+        // Aggiungi un listener per la gestione del caricamento dei file
+        uploadInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    canvas.width = camera.videoWidth;
+                    canvas.height = camera.videoHeight;
+                    context.drawImage(camera, 0, 0, canvas.width, canvas.height);
+                    imageToUpload = e.target.result;
+                    stopCameraStream();
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        // Assicurati di fermare la fotocamera quando la pagina viene chiusa o ricaricata
+        window.addEventListener('beforeunload', stopCameraStream);
+    </script>
+</body>
+</html>

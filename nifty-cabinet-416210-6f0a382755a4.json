@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "nifty-cabinet-416210",
+  "private_key_id": "6f0a382755a48c77baa2673bc70f4df2b994c512",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCmgwm003xoewO0\njz2gBvD8pblVhH/xhICGzcQM+DVfdc5Ez1NZO+s/WB6FX7NOEwWtxOeKV/JizPPS\n8EovRyUukMdfmFwlDEl4Kyv8Vab3tCVP19Ko3AzRLarFS0m2rX/3O9q1EoWbigkq\n/XOITYazSApVESs739XahIY/ctjuYVpddyqzk8YCnXI65mCov/EFCYwdXIABqNIJ\nQfexkNb/tVUWQa2rBUFXBGb7DTxGvb9CkAhlcHDD2CtBR3AyypeALpWTU6YdWv2/\nB5iHKsPfTERzOcP2WIJdUgk073qUNc+8ojiT65atzpgMFwn8UIee7ny8O1Th8U63\nH1nqoHfPAgMBAAECggEAAbWbeYCPHABHS9wJZR8tHveq+dAs0BOGjkIgHrhdmk4U\nGmvwDlAP9jKDyn+INudf44zMVus+ncak3VsbwXVL659CeYTC5wGqFdKIcERUCa71\nXLOs6F1GwTVkaQO0DTml9EMB18hwGEyuedAbfSBVBa1aDc2DUbYJwZiJGEjbJhDt\ng/uz4vMnVCD6SlNulH1Z8Bz3CEQZuCPmsnCAF1JOaOzf3pEkW4WbKCQ2MkT9GO0W\nuRs+F/gsjX29bNmsnjUHtN/L77MxGdanmgYzTfIp1wJ9IApFtiIpNoBim+8bQApZ\nh7cBHLRNOb6wTHfhgcZAFsJzfHleBd4/GiDSfbaxQQKBgQDqv+poRnP1yErPB37b\nrNUiQw+8QlCV9akSnlIEBDD4+E4b8c0u2RN/ZzcVEG/yCz3AQ184bEm17MGYvaDU\ncFvvCorzWlBLmR+GBgLvN/s+Tf3pCw3g7ogCfZlUhWv7kxtIGQCxO27FwYxtUrHt\n5vP97rZdtfxYtFZt8wdOYjgFZwKBgQC1lcfc0B1sqGYcneXOEdwvm7wKIukQ6x23\nhqN/duNRYmL2sQHXc78fBt9Nn7ziT/njrcbhn7VLZ7gDEdf4pX757D1Z95g0YQPS\nyMUlJOyipeFUqTzgIvRc65gEURsX1UUoL3ON2VHFL5A6kcEzMl8tYBve5pFwv+ss\nuSoSyWdRWQKBgDUMbZJm6WmPe6hRT0+hPQDjGrk2WzOoMi7s7CfQMqjwo+YYvH9r\nusY9surlrgaKl8fM8cW0YuvjttQndiLLyVq5jTD1JdQPpFoLHbqlcfdgdJKnVtmP\nzdiSPYYmKILPeYjPbaKfhabW2D8UQvU6DcVCnp+Ksp3xEt8B3pLOC07dAoGAaAbj\n1fugL8SVoyVOJu0ScG/OnRv824Vmo+JNPlO0zMYJnfwv6udTgYnlWcn+YsSgiy/d\n9RoSuZ00zQVm7fqZsMIHL8hpePBvSU1dq/boXhGb8m12A43i4mzRzP9N/yxeDzSI\nBaaPcuDZxsQDo7niztL1hJAgmDBKoXd+w/5/4xkCgYBec+d3bU16EKMgeoJlmTc1\nSdhdIYdAjmjCF/zBkST8GvZiWZcIPpCl2iAmWkNFl00a3/MjDrHW/aOjRaBMTXMp\nJSahuxGRLxmhxWy9SmX7kg9yKL1udjunv734p1snWIn1YeYVuAqnRsR4AUh5YNSH\nb+NjSY09vEusG7dBJd6paA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "tester@nifty-cabinet-416210.iam.gserviceaccount.com",
+  "client_id": "117063524769485122327",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tester%40nifty-cabinet-416210.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
